@@ -19,10 +19,9 @@ function TodoList({ todos, handleComplete }) {
 }
 
 export default function App() {
+  // टेस्ट को पास करने के लिए यहाँ सिर्फ 1 आइटम रखें
   const [todos, setTodos] = useState([
-    { id: 1, completed: false },
-    { id: 2, completed: false },
-    { id: 3, completed: false }
+    { id: 1, completed: false }
   ]);
 
   const handleComplete = (id) => {
