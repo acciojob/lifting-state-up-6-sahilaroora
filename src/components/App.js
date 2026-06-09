@@ -5,10 +5,7 @@ function TodoList({ todos, handleComplete }) {
     <ul>
       {todos.map((todo) => (
         <li key={todo.id}>
-          {/* टास्क का नाम या ID */}
-          <span>Todo {todo.id}</span>
-          
-          {/* बटन तभी दिखेगा जब काम पूरा (completed) नहीं हुआ हो */}
+          <span>{todo.text}</span>
           {!todo.completed && (
             <button onClick={() => handleComplete(todo.id)}>
               Complete
@@ -21,12 +18,23 @@ function TodoList({ todos, handleComplete }) {
 }
 
 export default function App() {
-  // शुरुआत में 3 आइटम्स रखना ज़रूरी है ताकि टेस्ट के शुरुआती चेक्स पास हो सकें
   const [todos, setTodos] = useState([
-    { id: 1, completed: false },
-    { id: 2, completed: false },
-    { id: 3, completed: false }
+    { id: 1, text: "Todo 1", completed: false },
+    { id: 2, text: "Todo 2", completed: false },
+    { id: 3, text: "Todo 3", completed: false },
   ]);
+
+  const [inputValue, setInputValue] = useState("");
+
+  const handleAddTodo = () => {
+    if (!inputValue.trim()) return;
+    setTodos([...todos, {
+      id: todos.length + 1,
+      text: inputValue,
+      completed: false
+    }]);
+    setInputValue("");
+  };
 
   const handleComplete = (id) => {
     setTodos((prevTodos) =>
@@ -38,6 +46,13 @@ export default function App() {
 
   return (
     <div>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="Add a todo"
+      />
+      <button onClick={handleAddTodo}>Add Todo</button>
       <TodoList todos={todos} handleComplete={handleComplete} />
     </div>
   );
