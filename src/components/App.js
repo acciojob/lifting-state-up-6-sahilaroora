@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 
-function App() {
+export default function App() {
   const [todos, setTodos] = useState([
-    { id: 1, text: "Learn React", completed: false },
-    { id: 2, text: "Learn JavaScript", completed: false },
-    { id: 3, text: "Build Project", completed: false }
+    { id: 1, text: "Todo 1", completed: false },
+    { id: 2, text: "Todo 2", completed: false }
   ]);
 
   const handleComplete = (id) => {
-    setTodos(
-      todos.map((todo) =>
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
         todo.id === id
           ? { ...todo, completed: true }
           : todo
@@ -28,12 +27,8 @@ function App() {
               Complete
             </button>
           )}
-
-          {todo.completed && " Completed"}
         </li>
       ))}
     </ul>
   );
 }
-
-export default App;
